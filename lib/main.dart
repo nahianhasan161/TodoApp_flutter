@@ -10,7 +10,7 @@ void main() async {
   /* hive init */
   await Hive.initFlutter();
   /* open a box */
-  var box = await Hive.openBox('mybox');
+  await Hive.openBox('mybox');
   /* run app */
   runApp(MyApp());
 }
