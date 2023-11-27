@@ -37,12 +37,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Expanded(
-        child: Column(
-          children: [
-            Image.asset('assets/images/todo-app.png'),
-          ],
-        ),
+      splash: Column(
+        children: [
+          Image.asset('assets/images/todo-app.png'),
+        ],
       ),
       backgroundColor: Colors.yellow,
       nextScreen: ToDoPage(),
