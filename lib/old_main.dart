@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:todo_app/old_main.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class CounterPage extends StatefulWidget {
-  CounterPage({super.key});
+  const CounterPage({super.key});
 
   @override
   State<CounterPage> createState() => _CounterPageState();
@@ -27,6 +28,7 @@ class _CounterPageState extends State<CounterPage> {
   @override
 
   /* variables */
+  // ignore: override_on_non_overriding_member
   int _counter = 0;
 
 /* functions*/
@@ -49,6 +51,7 @@ class _CounterPageState extends State<CounterPage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -72,8 +75,8 @@ class _CounterPageState extends State<CounterPage> {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: increamentCounter,
-        child: Icon(Icons.add),
         tooltip: "Increment",
+        child: Icon(Icons.add),
       ),
     );
   }

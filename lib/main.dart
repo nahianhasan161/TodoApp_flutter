@@ -1,10 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/old_main.dart';
-import 'package:todo_app/todo_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'package:todo_app/pages/todo_page.dart';
+
+void main() async {
+  /* hive init */
+  await Hive.initFlutter();
+  /* open a box */
+  var box = await Hive.openBox('mybox');
+  /* run app */
   runApp(MyApp());
 }
 
@@ -14,46 +21,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CounterPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.yellow,
+        appBarTheme: AppBarTheme(backgroundColor: Colors.yellow),
+      ),
+      home: SplashScreen(),
     );
   }
 }
 
-class CounterPage extends StatefulWidget {
-  CounterPage({super.key});
-
-  @override
-  State<CounterPage> createState() => _CounterPageState();
-}
-
-class _CounterPageState extends State<CounterPage> {
-  @override
-
-  /* variables */
-  int _counter = 0;
-
-/* functions*/
-
-  void increamentCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void decreamentCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
-  void resetCounter() {
-    setState(() {
-      _counter = 0;
-    });
-  }
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: ToDoPage());
+    return AnimatedSplashScreen(
+      splash: Expanded(
+        child: Column(
+          children: [
+            Image.asset('assets/images/todo-app.png'),
+          ],
+        ),
+      ),
+      backgroundColor: Colors.yellow,
+      nextScreen: ToDoPage(),
+      splashIconSize: 450,
+      duration: 4000,
+      splashTransition: SplashTransition.fadeTransition,
+    );
   }
 }
